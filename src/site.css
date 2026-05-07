@@ -24,3 +24,26 @@ nav[aria-label="Documentation"] {
 form[role="group"] {
   align-items: center;
 }
+
+[data-kind="alert"]:has(> [data-v-content]) {
+  display: flex;
+  align-items: center;
+  gap: var(--vitre-space-3, 0.75rem);
+}
+
+[data-kind="alert"] > [data-v-content] {
+  flex: 1 1 auto;
+}
+
+[data-kind="alert"][dismiss]::after {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  inline-size: 2rem;
+  block-size: 2rem;
+  margin-inline-start: auto;
+}
+
+[data-kind="alert"][data-v-enhanced="true"]::after {
+  display: none;
+}

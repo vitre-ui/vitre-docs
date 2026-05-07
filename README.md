@@ -26,4 +26,4 @@ GitHub Pages builds from `main` with `.github/workflows/pages.yml`.
 
 - Build command: `pnpm build`
 - Build output directory: `dist`
-- Pages URL: `https://vitre-ui.github.io/vitre-docs/`
+- Pages URL: `https://docs.vitre-ui.com/`
