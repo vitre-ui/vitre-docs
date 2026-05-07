@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Documentation for Vitre UI, including Vitre CSS and Vitre JS."
+    >
+    <title>Vitre UI Documentation</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav aria-label="Documentation">
+        <a href="#overview">Overview</a>
+        <a href="#install">Install</a>
+        <a href="#css">Vitre CSS</a>
+        <a href="#js">Vitre JS</a>
+        <a href="#examples">Examples</a>
+        <a href="#links">Links</a>
+      </nav>
+
+      <h1>Vitre UI</h1>
+      <p>The transparent style layer and styleless behavior layer for semantic HTML.</p>
+      <p>
+        Vitre UI is made of two small packages. <strong>Vitre CSS</strong> gives ordinary
+        semantic HTML a polished interface treatment. <strong>Vitre JS</strong> adds optional
+        behavior to semantic component patterns without owning your rendering model.
+      </p>
+      <p data-kind="alert" data-color="info">
+        This documentation site is built as a user of the packages it documents: Vite imports
+        <code>vitre-css</code> and <code>vitre-js</code> from npm dependencies.
+      </p>
+    </header>
+
+    <main>
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          Use Vitre CSS when you want semantic HTML to look complete without classes. Add Vitre JS
+          when that semantic HTML needs progressive behavior such as dismissible alerts.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Role</th>
+              <th>Use it when</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>vitre-css</code></td>
+              <td>Classless styling</td>
+              <td>You want semantic elements, forms, tables, code, dialogs, and alerts styled by default.</td>
+            </tr>
+            <tr>
+              <td><code>vitre-js</code></td>
+              <td>Optional behavior</td>
+              <td>You want progressive interactivity for Vitre-compatible semantic component markup.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="install">
+        <h2>Install</h2>
+        <p>Install the packages you need from npm.</p>
+
+        <pre><code>pnpm add vitre-css vitre-js</code></pre>
+
+        <p>Import both packages from an application entrypoint.</p>
+
+        <pre><code>import "vitre-css/vitre.css";
+import "vitre-js/vitre.js";</code></pre>
+
+        <p>For static pages without a build step, load the browser files from a CDN.</p>
+
+        <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vitre-css/vitre.css"&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/vitre-js/vitre.js"&gt;&lt;/script&gt;</code></pre>
+      </section>
+
+      <section id="css">
+        <h2>Vitre CSS</h2>
+        <p>
+          Vitre CSS styles semantic HTML directly. It targets modern browsers and exposes
+          customization through <code>--vitre-*</code> CSS variables.
+        </p>
+
+        <h3>Semantic Markup</h3>
+        <pre><code>&lt;main&gt;
+  &lt;section&gt;
+    &lt;h1&gt;Account settings&lt;/h1&gt;
+    &lt;p&gt;Manage your profile and notification preferences.&lt;/p&gt;
+
+    &lt;form&gt;
+      &lt;label&gt;
+        Email
+        &lt;input type="email" placeholder="you@example.com"&gt;
+      &lt;/label&gt;
+
+      &lt;button&gt;Save changes&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+
+        <h3>Theme Tokens</h3>
+        <p>Override variables after importing Vitre CSS.</p>
+
+        <pre><code>:root {
+  --vitre-hue: 168;
+  --vitre-primary: hsl(var(--vitre-hue) 76% 42%);
+  --vitre-radius: 0.5rem;
+  --vitre-measure: 80ch;
+}</code></pre>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Preview</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--vitre-primary</code></td>
+              <td><mark data-token="primary"></mark></td>
+              <td>Links, focus rings, and primary actions</td>
+            </tr>
+            <tr>
+              <td><code>--vitre-surface</code></td>
+              <td><mark data-token="surface"></mark></td>
+              <td>Panels and elevated surfaces</td>
+            </tr>
+            <tr>
+              <td><code>--vitre-muted</code></td>
+              <td><mark data-token="muted"></mark></td>
+              <td>Secondary text</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Button Variants</h3>
+        <form role="group" aria-label="Button variants">
+          <button type="button">Default</button>
+          <button type="button" data-variant="flat">Flat</button>
+          <button type="button" data-variant="outline">Outline</button>
+          <button type="button" data-variant="ghost">Ghost</button>
+          <button type="button" data-variant="plain">Plain</button>
+        </form>
+      </section>
+
+      <section id="js">
+        <h2>Vitre JS</h2>
+        <p>
+          Vitre JS discovers supported semantic component patterns and enhances them in place.
+          Browser script usage applies automatically on page load.
+        </p>
+
+        <pre><code>import { Vitre, apply } from "vitre-js";
+
+Vitre.apply();
+Vitre.apply(document.querySelector("#dynamic-content"), ["alerts"]);</code></pre>
+
+        <p>
+          The first supported behavior is alerts. Alerts use <code>data-kind="alert"</code>,
+          optional <code>dismiss</code>, and optional <code>timeout</code>.
+        </p>
+      </section>
+
+      <section id="examples">
+        <h2>Examples</h2>
+
+        <div data-kind="alert" data-color="success" role="status" dismiss>
+          Saved successfully. This alert can be dismissed.
+        </div>
+
+        <div data-kind="alert" data-color="warning" role="alert" dismiss timeout="12">
+          Review this warning. It can be dismissed or time out after twelve seconds.
+        </div>
+
+        <pre><code>&lt;div data-kind="alert" data-color="success" role="status" dismiss&gt;
+  Saved successfully.
+&lt;/div&gt;</code></pre>
+      </section>
+
+      <section id="links">
+        <h2>Links</h2>
+        <ul>
+          <li>Vitre CSS npm: <a href="https://www.npmjs.com/package/vitre-css">https://www.npmjs.com/package/vitre-css</a></li>
+          <li>Vitre CSS repo: <a href="https://github.com/vitre-ui/vitre-css">https://github.com/vitre-ui/vitre-css</a></li>
+          <li>Vitre JS npm: <a href="https://www.npmjs.com/package/vitre-js">https://www.npmjs.com/package/vitre-js</a></li>
+          <li>Vitre JS repo: <a href="https://github.com/vitre-ui/vitre-js">https://github.com/vitre-ui/vitre-js</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Vitre Docs is published from the <a href="https://github.com/vitre-ui/vitre-docs">vitre-docs</a> repository.
+      </p>
+    </footer>
+  </body>
+</html>

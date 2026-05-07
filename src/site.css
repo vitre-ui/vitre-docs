@@ -1,0 +1,26 @@
+:root {
+  scroll-behavior: smooth;
+}
+
+body > header,
+body > main,
+body > footer {
+  width: min(100% - 2rem, var(--vitre-measure, 80ch));
+  margin-inline: auto;
+}
+
+body > header {
+  padding-block-start: 2rem;
+}
+
+nav[aria-label="Documentation"] {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding-block: 0.75rem;
+  background: var(--vitre-bg);
+}
+
+form[role="group"] {
+  align-items: center;
+}

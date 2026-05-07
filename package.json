@@ -1,0 +1,19 @@
+{
+  "name": "vitre-docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vitre-css": "^1.5.0",
+    "vitre-js": "^0.3.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
