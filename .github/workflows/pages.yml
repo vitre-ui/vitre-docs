@@ -37,6 +37,9 @@ jobs:
       - name: Build site
         run: pnpm build
 
+      - name: Add custom domain
+        run: cp CNAME dist/CNAME
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
