@@ -88,7 +88,7 @@
 
         <p>
           The unversioned unpkg URLs resolve to the latest published npm versions quickly. Use a
-          pinned URL such as <code>https://unpkg.com/vitre-css@1.5.6/vitre.css</code> when a page
+          pinned URL such as <code>https://unpkg.com/vitre-css@1.5.10/vitre.css</code> when a page
           needs a fixed dependency version.
         </p>
       </section>
@@ -257,6 +257,12 @@
                     <td><code>flat</code>, <code>outline</code>, <code>ghost</code>, <code>plain</code></td>
                     <td><code>button</code></td>
                     <td>Changes the visual treatment of a button while preserving native button behavior.</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-fit</code></td>
+                    <td><code>contain</code></td>
+                    <td><code>video</code>, <code>iframe</code>, <code>embed</code>, <code>object</code></td>
+                    <td>Keeps embedded media responsive while preserving its aspect ratio.</td>
                   </tr>
                   <tr>
                     <td><code>data-token</code></td>
@@ -442,7 +448,7 @@
                 </header>
                 <aside>Nested asides become callouts inside larger content.</aside>
                 <footer>
-                  <small>Version 1.5.6</small>
+                  <small>Version 1.5.10</small>
                 </footer>
               </article>
             </section>
@@ -469,7 +475,12 @@
 
             <section id="media">
               <h3>Media</h3>
-              <p>Images, SVG, video, audio, canvas, iframes, objects, and embeds inherit sensible sizing and framing.</p>
+              <p>
+                Images, SVG, video, audio, canvas, iframes, objects, and embeds inherit sensible
+                sizing and framing. Iframes keep a responsive aspect ratio by default, and
+                <code>data-fit="contain"</code> is available for framed media that needs the same
+                treatment explicitly.
+              </p>
               <figure>
                 <svg role="img" aria-label="Abstract glass panel sample" viewBox="0 0 720 240">
                   <rect width="720" height="240" rx="28" fill="hsl(214 88% 46% / 0.16)"></rect>
@@ -478,6 +489,25 @@
                   <path d="M120 172 C 230 62, 356 236, 600 74" fill="none" stroke="hsl(214 88% 46%)" stroke-width="16" stroke-linecap="round"></path>
                 </svg>
                 <figcaption>Inline SVG inside a figure.</figcaption>
+              </figure>
+              <figure>
+                <audio controls src="media/september.mp3"></audio>
+                <figcaption>Audio example using a local MP3 asset.</figcaption>
+              </figure>
+              <figure>
+                <video controls src="media/drowning-in-life-clip.mp4" width="348" height="348"></video>
+                <figcaption>Video example using a local MP4 asset.</figcaption>
+              </figure>
+              <figure>
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/P7xQjeeNIGU"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen></iframe>
+                <figcaption>YouTube embed example for responsive iframe styling.</figcaption>
               </figure>
             </section>
 

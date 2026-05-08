@@ -17,16 +17,19 @@ body > header {
   grid-template-columns: minmax(11rem, 0.35fr) minmax(0, 1fr);
   gap: var(--vitre-space-5, 1.5rem);
   align-items: start;
+  min-inline-size: 0;
 }
 
 [data-docs-reference] > aside {
   position: sticky;
   top: 4.5rem;
+  min-inline-size: 0;
 }
 
 [data-docs-reference] nav {
   display: grid;
   gap: 0.25rem;
+  max-inline-size: 100%;
 }
 
 [data-docs-reference] nav a {
@@ -44,28 +47,45 @@ body > header {
 
 [data-docs-reference-content] {
   min-inline-size: 0;
+  max-inline-size: 100%;
 }
 
 [data-docs-reference-content] > section {
+  min-inline-size: 0;
+  max-inline-size: 100%;
   scroll-margin-block-start: 5.5rem;
 }
 
+main :where(table, pre) {
+  display: block;
+  max-inline-size: 100%;
+  overflow-x: auto;
+}
+
 main > section {
+  min-inline-size: 0;
+  max-inline-size: 100%;
   scroll-margin-block-start: 5.5rem;
 }
 
 @media (max-width: 760px) {
   [data-docs-reference] {
+    display: block;
     grid-template-columns: 1fr;
   }
 
   [data-docs-reference] > aside {
     position: static;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    overflow: hidden;
   }
 
   [data-docs-reference] nav {
     grid-auto-flow: column;
     grid-auto-columns: max-content;
+    inline-size: 100%;
+    max-inline-size: calc(100vw - 2rem);
     overflow-x: auto;
     padding-block-end: 0.25rem;
   }
