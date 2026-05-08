@@ -97,7 +97,7 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vitre-css@latest/vitre.css">
+    <link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css">
     <link rel="stylesheet" href="/site.css">
   </head>
   <body>
@@ -165,14 +165,14 @@
 
         <p>Link Vitre CSS before the page renders and import Vitre JS from a static module.</p>
 
-        <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vitre-css@latest/vitre.css"&gt;
+        <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css"&gt;
 
-import "https://cdn.jsdelivr.net/npm/vitre-js@latest/vitre.js";</code></pre>
+import "https://unpkg.com/vitre-js/vitre.js";</code></pre>
 
         <p>For static pages without a build step, load the browser files from a CDN.</p>
 
-        <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vitre-css@latest/vitre.css"&gt;
-&lt;script type="module" src="https://cdn.jsdelivr.net/npm/vitre-js@latest/vitre.js"&gt;&lt;/script&gt;</code></pre>
+        <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css"&gt;
+&lt;script type="module" src="https://unpkg.com/vitre-js/vitre.js"&gt;&lt;/script&gt;</code></pre>
       </section>
 
       <section id="css">
@@ -299,7 +299,7 @@ Vitre.apply(document.querySelector("#dynamic-content"), ["alerts"]);</code></pre
       </p>
     </footer>
     <script type="module">
-      import "https://cdn.jsdelivr.net/npm/vitre-js@latest/vitre.js";
+      import "https://unpkg.com/vitre-js/vitre.js";
     </script>
   </body>
 </html>
