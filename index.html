@@ -97,9 +97,8 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="/node_modules/vitre-css/vitre.css">
-    <link rel="stylesheet" href="/src/site.css">
-    <script type="module" src="/src/main.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vitre-css/vitre.css">
+    <link rel="stylesheet" href="/site.css">
   </head>
   <body>
     <header>
@@ -164,11 +163,11 @@
 
         <pre><code>pnpm add vitre-css vitre-js</code></pre>
 
-        <p>Link Vitre CSS before the page renders and import Vitre JS from an application entrypoint.</p>
+        <p>Link Vitre CSS before the page renders and import Vitre JS from a static module.</p>
 
-        <pre><code>&lt;link rel="stylesheet" href="/node_modules/vitre-css/vitre.css"&gt;
+        <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vitre-css/vitre.css"&gt;
 
-import "vitre-js/vitre.js";</code></pre>
+import "https://cdn.jsdelivr.net/npm/vitre-js/vitre.js";</code></pre>
 
         <p>For static pages without a build step, load the browser files from a CDN.</p>
 
@@ -299,5 +298,8 @@ Vitre.apply(document.querySelector("#dynamic-content"), ["alerts"]);</code></pre
         Vitre Docs is published from the <a href="https://github.com/vitre-ui/vitre-docs">vitre-docs</a> repository.
       </p>
     </footer>
+    <script type="module">
+      import "https://cdn.jsdelivr.net/npm/vitre-js/vitre.js";
+    </script>
   </body>
 </html>

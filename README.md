@@ -2,28 +2,20 @@
 
 Documentation for Vitre UI, covering `vitre-css` and `vitre-js`.
 
-This site is built with Vite and uses Vitre packages as normal npm
-dependencies. The first implementation is plain semantic HTML with no UI
-framework.
+This site is plain static HTML/CSS/JS. It loads the latest published Vitre
+packages from jsDelivr so it showcases current `vitre-css` and `vitre-js`
+behavior without a local package install or build step.
 
 ## Development
 
 ```sh
-pnpm install
-pnpm dev
+http-server .
 ```
 
-## Build
-
-```sh
-pnpm build
-pnpm serve
-```
+Any static file server can be used from the repository root.
 
 ## Deployment
 
-GitHub Pages builds from `main` with `.github/workflows/pages.yml`.
+GitHub Pages serves the repository root from `main`.
 
-- Build command: `pnpm build`
-- Build output directory: `dist`
 - Pages URL: `https://docs.vitre-ui.com/`
