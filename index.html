@@ -8,130 +8,47 @@
       content="Documentation for Vitre UI, including Vitre CSS and Vitre JS."
     >
     <title>Vitre UI Documentation</title>
-    <style>
-      @layer vitre.reset, vitre.theme, vitre.light, vitre.dark, vitre.base;
-
-      @layer vitre.reset {
-        html {
-          -webkit-text-size-adjust: 100%;
-          text-size-adjust: 100%;
-        }
-
-        body,
-        h1,
-        h2,
-        h3,
-        p,
-        ul {
-          margin: 0;
-        }
-      }
-
-      @layer vitre.theme {
-        :root {
-          color-scheme: light dark;
-          --vitre-font-sans: "Segoe UI", -apple-system, BlinkMacSystemFont, "Ubuntu", "Cantarell", "Noto Sans", "Roboto", ui-sans-serif, system-ui, sans-serif;
-          --vitre-font-weight: 400;
-          --vitre-leading: 1.65;
-          --vitre-measure: 72ch;
-          --vitre-step-0: clamp(1rem, 0.97rem + 0.18vw, 1.1rem);
-          --vitre-space-6: 2rem;
-          --vitre-page-glow: color-mix(in oklab, var(--vitre-primary), transparent 78%);
-          --vitre-page-tint: color-mix(in oklab, var(--vitre-bg), var(--vitre-primary) 5%);
-          --vitre-hue: 214;
-          --vitre-primary: hsl(var(--vitre-hue) 88% 56%);
-        }
-      }
-
-      @layer vitre.light {
-        :root,
-        html[data-theme="light"] {
-          color-scheme: light;
-          --vitre-bg: hsl(210 32% 98%);
-          --vitre-text: hsl(222 38% 14%);
-        }
-      }
-
-      @layer vitre.dark {
-        @media (prefers-color-scheme: dark) {
-          :root:not([data-theme="light"]) {
-            color-scheme: dark;
-            --vitre-bg: hsl(224 26% 8%);
-            --vitre-text: hsl(210 35% 94%);
-          }
-        }
-
-        html[data-theme="dark"] {
-          color-scheme: dark;
-          --vitre-bg: hsl(224 26% 8%);
-          --vitre-text: hsl(210 35% 94%);
-        }
-      }
-
-      @layer vitre.base {
-        html {
-          min-block-size: 100%;
-          background:
-            radial-gradient(circle at top left, var(--vitre-page-glow), transparent 34rem),
-            linear-gradient(135deg, var(--vitre-bg), var(--vitre-page-tint));
-        }
-
-        body {
-          min-block-size: 100%;
-          color: var(--vitre-text);
-          font-family: var(--vitre-font-sans);
-          font-size: var(--vitre-step-0);
-          font-weight: var(--vitre-font-weight);
-          line-height: var(--vitre-leading);
-        }
-
-        body > header,
-        body > main,
-        body > footer {
-          inline-size: min(100% - 2rem, var(--vitre-measure));
-          margin-inline: auto;
-        }
-
-        body > header {
-          padding-block-start: var(--vitre-space-6);
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="/vitre-base.css">
     <link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css">
     <link rel="stylesheet" href="/site.css">
   </head>
   <body>
-    <header>
-      <nav aria-label="Documentation">
-        <a href="#overview">Overview</a>
-        <a href="#install">Install</a>
-        <a href="#css">Vitre CSS</a>
-        <a href="#js">Vitre JS</a>
-        <a href="#examples">Examples</a>
-        <a href="#links">Links</a>
-      </nav>
+    <nav aria-label="Documentation" data-width="wide">
+      <a href="#overview">Overview</a>
+      <a href="#installation">Installation</a>
+      <a href="#getting-started">Getting Started</a>
+      <a href="#directives">Directives</a>
+      <a href="#reference">Reference</a>
+      <a href="examples.html">Examples</a>
+    </nav>
 
-      <h1>Vitre UI</h1>
-      <p>The transparent style layer and styleless behavior layer for semantic HTML.</p>
-      <p>
-        Vitre UI is made of two small packages. <strong>Vitre CSS</strong> gives ordinary
-        semantic HTML a polished interface treatment. <strong>Vitre JS</strong> adds optional
-        behavior to semantic component patterns without owning your rendering model.
-      </p>
+    <header data-width="wide">
+      <figure data-docs-hero>
+        <img src="/images/vitre-ui-dark.webp" alt="Vitre UI">
+      </figure>
+
+      <h1>Vitre UI Documentation</h1>
+      <p>Vitre UI is the transparent style layer and styleless behavior layer for semantic HTML.</p>
+      <p>Vitre UI is made of two small packages:</p>
+      <ul>
+        <li><strong>Vitre CSS</strong> - gives ordinary semantic HTML a polished interface treatment.</li>
+        <li><strong>Vitre JS</strong> - adds optional behavior to semantic component patterns without owning your rendering model.</li>
+      </ul>
       <p data-kind="alert" data-color="info">
         <span data-v-content>
-          This documentation site is built as a user of the packages it documents: Vite imports
-          <code>vitre-css</code> and <code>vitre-js</code> from npm dependencies.
+          This documentation site is plain static HTML using the same unpkg CDN files a no-build
+          application can use.
         </span>
       </p>
     </header>
 
-    <main>
+    <main data-width="wide">
       <section id="overview">
         <h2>Overview</h2>
         <p>
-          Use Vitre CSS when you want semantic HTML to look complete without classes. Add Vitre JS
-          when that semantic HTML needs progressive behavior such as dismissible alerts.
+          Vitre is for pages and small applications that start with semantic HTML. It styles the
+          platform elements first, then adds small behavior conventions only where behavior is
+          actually needed.
         </p>
 
         <table>
@@ -157,32 +74,29 @@
         </table>
       </section>
 
-      <section id="install">
-        <h2>Install</h2>
+      <section id="installation">
+        <h2>Installation</h2>
         <p>Install the packages you need from npm.</p>
 
         <pre><code>pnpm add vitre-css vitre-js</code></pre>
 
-        <p>Link Vitre CSS before the page renders and import Vitre JS from a static module.</p>
+        <p>For static pages without a build step, load the browser files from unpkg.</p>
 
-        <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css"&gt;
-
-import "https://unpkg.com/vitre-js/vitre.js";</code></pre>
-
-        <p>For static pages without a build step, load the browser files from a CDN.</p>
-
-        <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css"&gt;
+        <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre-base.css"&gt;
+&lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css"&gt;
 &lt;script type="module" src="https://unpkg.com/vitre-js/vitre.js"&gt;&lt;/script&gt;</code></pre>
+
+        <p>
+          The unversioned unpkg URLs resolve to the latest published npm versions quickly. Use a
+          pinned URL such as <code>https://unpkg.com/vitre-css@1.5.6/vitre.css</code> when a page
+          needs a fixed dependency version.
+        </p>
       </section>
 
-      <section id="css">
-        <h2>Vitre CSS</h2>
-        <p>
-          Vitre CSS styles semantic HTML directly. It targets modern browsers and exposes
-          customization through <code>--vitre-*</code> CSS variables.
-        </p>
+      <section id="getting-started">
+        <h2>Getting Started</h2>
+        <p>Start with ordinary HTML. Vitre CSS styles the elements directly.</p>
 
-        <h3>Semantic Markup</h3>
         <pre><code>&lt;main&gt;
   &lt;section&gt;
     &lt;h1&gt;Account settings&lt;/h1&gt;
@@ -199,107 +113,630 @@ import "https://unpkg.com/vitre-js/vitre.js";</code></pre>
   &lt;/section&gt;
 &lt;/main&gt;</code></pre>
 
-        <h3>Theme Tokens</h3>
-        <p>Override variables after importing Vitre CSS.</p>
+        <p data-kind="alert" data-color="info">
+          <span data-v-content>
+            If you notice a first paint "flash", "bounce", or "jump" on the initial rendering,
+            copy <code>vitre-base.css</code> to your local project and link to it from the
+            <code>index.html</code> page before <code>vitre.css</code>.
+          </span>
+        </p>
 
-        <pre><code>:root {
-  --vitre-hue: 168;
-  --vitre-primary: hsl(var(--vitre-hue) 76% 42%);
-  --vitre-radius: 0.5rem;
-  --vitre-measure: 80ch;
-}</code></pre>
+        <pre><code>&lt;link rel="stylesheet" href="/vitre-base.css"&gt;
+&lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css"&gt;</code></pre>
+      </section>
+
+      <section id="directives">
+        <h2>Directives</h2>
+        <p>
+          Vitre uses ordinary HTML attributes as declarative directives. For example,
+          <code>data-color</code> is an attribute in HTML terms, and a Vitre color directive in
+          Vitre usage.
+        </p>
 
         <table>
           <thead>
             <tr>
-              <th>Token</th>
-              <th>Preview</th>
-              <th>Role</th>
+              <th>Attribute</th>
+              <th>Used by</th>
+              <th>Purpose</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>--vitre-primary</code></td>
-              <td><mark data-token="primary"></mark></td>
-              <td>Links, focus rings, and primary actions</td>
+              <td><code>data-theme</code></td>
+              <td>CSS</td>
+              <td>Force <code>light</code> or <code>dark</code> mode on the root element.</td>
             </tr>
             <tr>
-              <td><code>--vitre-surface</code></td>
-              <td><mark data-token="surface"></mark></td>
-              <td>Panels and elevated surfaces</td>
+              <td><code>data-kind</code></td>
+              <td>CSS and JS</td>
+              <td>Identify semantic component patterns such as <code>alert</code> and <code>theme-toggle</code>.</td>
             </tr>
             <tr>
-              <td><code>--vitre-muted</code></td>
-              <td><mark data-token="muted"></mark></td>
-              <td>Secondary text</td>
+              <td><code>data-color</code></td>
+              <td>CSS</td>
+              <td>Apply named intent colors: <code>primary</code>, <code>info</code>, <code>success</code>, <code>warning</code>, or <code>error</code>.</td>
+            </tr>
+            <tr>
+              <td><code>data-variant</code></td>
+              <td>CSS</td>
+              <td>Choose button treatments: <code>flat</code>, <code>outline</code>, <code>ghost</code>, or <code>plain</code>.</td>
+            </tr>
+            <tr>
+              <td><code>dismiss</code></td>
+              <td>JS</td>
+              <td>Add a generated close button to a supported component.</td>
+            </tr>
+            <tr>
+              <td><code>timeout</code></td>
+              <td>JS</td>
+              <td>Automatically dismiss a supported component after the given seconds.</td>
             </tr>
           </tbody>
         </table>
-
-        <h3>Button Variants</h3>
-        <form role="group" aria-label="Button variants">
-          <button type="button">Default</button>
-          <button type="button" data-variant="flat">Flat</button>
-          <button type="button" data-variant="outline">Outline</button>
-          <button type="button" data-variant="ghost">Ghost</button>
-          <button type="button" data-variant="plain">Plain</button>
-        </form>
       </section>
 
-      <section id="js">
-        <h2>Vitre JS</h2>
+      <section id="semantic-component-styling">
+        <h2>Semantic Component Styling</h2>
         <p>
-          Vitre JS discovers supported semantic component patterns and enhances them in place.
-          Browser script usage applies automatically on page load.
+          Vitre CSS treats plain document structure as interface structure. Sections become
+          readable panels, articles become self-contained cards, asides become callouts, and forms
+          become complete controls without class names.
         </p>
 
-        <pre><code>import { Vitre, apply } from "vitre-js";
-
-Vitre.apply();
-Vitre.apply(document.querySelector("#dynamic-content"), ["alerts"]);</code></pre>
-
-        <p>
-          The first supported behavior is alerts. Alerts use <code>data-kind="alert"</code>,
-          optional <code>dismiss</code>, and optional <code>timeout</code>.
-        </p>
+        <article>
+          <header>
+            <h3>Article Card</h3>
+            <p>Nested headers and footers create a natural card anatomy.</p>
+          </header>
+          <p>Use this pattern for self-contained records, previews, or settings groups.</p>
+          <footer>
+            <small>Updated <time datetime="2026-05-08">May 8, 2026</time></small>
+            <button type="button">Open</button>
+          </footer>
+        </article>
       </section>
 
-      <section id="examples">
-        <h2>Examples</h2>
+      <section id="reference">
+        <h2>Reference</h2>
+        <p>Use the reference sections for markup patterns, live examples, and relevant tokens.</p>
 
-        <div data-kind="alert" data-color="success" role="status" dismiss>
-          <span data-v-content>Saved successfully. This alert can be dismissed.</span>
-        </div>
+        <div data-docs-reference>
+          <aside>
+            <nav aria-label="Reference">
+              <a href="#directive-values">Directives</a>
+              <a href="#colors">Colors</a>
+              <a href="#themes">Themes</a>
+              <a href="#typography">Typography</a>
+              <a href="#lists">Lists</a>
+              <a href="#buttons">Buttons</a>
+              <a href="#alerts">Alerts</a>
+              <a href="#dialogs">Dialogs</a>
+              <a href="#semantic-components">Semantic Components</a>
+              <a href="#forms">Forms</a>
+              <a href="#media">Media</a>
+              <a href="#css-variables">CSS Variables</a>
+            </nav>
+          </aside>
 
-        <div data-kind="alert" data-color="warning" role="alert" dismiss timeout="12">
-          <span data-v-content>
-            Review this warning. It can be dismissed or time out after twelve seconds.
-          </span>
-        </div>
+          <div data-docs-reference-content>
+            <section id="directive-values">
+              <h3>Directives</h3>
+              <p>These are the Vitre-recognized attributes and values used by the current CSS and JS packages.</p>
 
-        <pre><code>&lt;div data-kind="alert" data-color="success" role="status" dismiss&gt;
+              <table>
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Values</th>
+                    <th>Used with</th>
+                    <th>Effect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>data-theme</code></td>
+                    <td><code>light</code>, <code>dark</code></td>
+                    <td><code>html</code></td>
+                    <td>Forces the page theme. Omit it to follow the system color scheme.</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-kind</code></td>
+                    <td><code>alert</code>, <code>theme-toggle</code></td>
+                    <td><code>div</code>, <code>p</code>, or another semantic container</td>
+                    <td>Marks a semantic component for Vitre styling or optional Vitre JS behavior.</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-color</code></td>
+                    <td><code>primary</code>, <code>info</code>, <code>success</code>, <code>warning</code>, <code>error</code></td>
+                    <td><code>[data-kind="alert"]</code>, <code>button</code>, <code>input</code> buttons, <code>progress</code>, <code>meter</code></td>
+                    <td>Sets semantic intent. Each supported component applies it as an accent, fill, foreground, border, or progress color.</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-variant</code></td>
+                    <td><code>flat</code>, <code>outline</code>, <code>ghost</code>, <code>plain</code></td>
+                    <td><code>button</code></td>
+                    <td>Changes the visual treatment of a button while preserving native button behavior.</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-token</code></td>
+                    <td>Any documented Vitre token swatch name</td>
+                    <td><code>mark</code></td>
+                    <td>Renders a token color swatch for documentation and examples.</td>
+                  </tr>
+                  <tr>
+                    <td><code>dismiss</code></td>
+                    <td>Boolean attribute</td>
+                    <td><code>[data-kind="alert"]</code></td>
+                    <td>Lets Vitre JS inject a dismiss button.</td>
+                  </tr>
+                  <tr>
+                    <td><code>timeout</code></td>
+                    <td>Seconds, such as <code>6</code> or <code>12</code></td>
+                    <td><code>[data-kind="alert"]</code></td>
+                    <td>Lets Vitre JS dismiss the alert automatically after the given delay.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="colors">
+              <h3>Colors</h3>
+              <p>
+                The <code>data-color</code> directive sets semantic intent on supported Vitre
+                components. Alerts use it as an accent and soft background, buttons adapt it to
+                the current variant, and progress indicators use it as their bar color.
+              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Value</th>
+                    <th>Example</th>
+                    <th>Use it for</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>primary</code></td>
+                    <td><button type="button" data-color="primary">Primary</button></td>
+                    <td>General emphasis tied to the current primary color.</td>
+                  </tr>
+                  <tr>
+                    <td><code>info</code></td>
+                    <td><button type="button" data-color="info" data-variant="outline">Info</button></td>
+                    <td>Neutral guidance, notes, and context.</td>
+                  </tr>
+                  <tr>
+                    <td><code>success</code></td>
+                    <td><button type="button" data-color="success">Success</button></td>
+                    <td>Completed, saved, valid, or positive states.</td>
+                  </tr>
+                  <tr>
+                    <td><code>warning</code></td>
+                    <td><button type="button" data-color="warning">Warning</button></td>
+                    <td>Caution, review-needed, or potentially disruptive states.</td>
+                  </tr>
+                  <tr>
+                    <td><code>error</code></td>
+                    <td><button type="button" data-color="error" data-variant="ghost">Error</button></td>
+                    <td>Errors, invalid states, and blocking problems.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="themes">
+              <h3>Themes</h3>
+              <p>Vitre follows the system color scheme by default. Use <code>data-theme</code> to override it.</p>
+              <pre><code>&lt;html data-theme="dark"&gt;</code></pre>
+              <form role="group" aria-label="Theme controls">
+                <span data-kind="theme-toggle"></span>
+                <label>
+                  Primary color
+                  <input id="primary-color" type="color" value="#2563eb">
+                </label>
+                <label>
+                  Theme
+                  <select id="theme-select">
+                    <option value="system">System</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                  </select>
+                </label>
+              </form>
+            </section>
+
+            <section id="typography">
+              <h3>Typography</h3>
+              <p>
+                Vitre styles headings, paragraphs, links, emphasis, marks, blockquotes, code,
+                keyboard hints, metadata, and document edits.
+              </p>
+              <blockquote>
+                <p>Classless CSS should make the common path beautiful while keeping customization clear.</p>
+              </blockquote>
+              <pre><code>&lt;p&gt;Use &lt;strong&gt;strong&lt;/strong&gt;, &lt;em&gt;emphasis&lt;/em&gt;, and &lt;mark&gt;marks&lt;/mark&gt; inline.&lt;/p&gt;</code></pre>
+            </section>
+
+            <section id="lists">
+              <h3>Lists</h3>
+              <p>Ordered, unordered, and menu lists use the same spacing rhythm as body copy.</p>
+              <ul>
+                <li>Semantic defaults</li>
+                <li>Readable spacing</li>
+                <li>Nested content support</li>
+              </ul>
+              <ol>
+                <li>Install the stylesheet</li>
+                <li>Write semantic HTML</li>
+                <li>Adjust variables when needed</li>
+              </ol>
+            </section>
+
+            <section id="buttons">
+              <h3>Buttons</h3>
+              <p>
+                Native buttons receive a complete default treatment. Variants use
+                <code>data-variant</code>, and semantic intent uses <code>data-color</code>.
+              </p>
+              <form role="group" aria-label="Button variants">
+                <button type="button">Default</button>
+                <button type="button" data-variant="flat">Flat</button>
+                <button type="button" data-variant="outline">Outline</button>
+                <button type="button" data-variant="ghost">Ghost</button>
+                <button type="button" data-variant="plain">Plain</button>
+              </form>
+              <form role="group" aria-label="Button colors">
+                <button type="button" data-color="success">Save</button>
+                <button type="button" data-color="info" data-variant="outline">Details</button>
+                <button type="button" data-color="warning" data-variant="flat">Review</button>
+                <button type="button" data-color="error" data-variant="ghost">Delete</button>
+              </form>
+              <pre><code>&lt;button type="button"&gt;Default&lt;/button&gt;
+&lt;button type="button" data-variant="flat"&gt;Flat&lt;/button&gt;
+&lt;button type="button" data-variant="outline" data-color="error"&gt;Delete&lt;/button&gt;</code></pre>
+            </section>
+
+            <section id="alerts">
+              <h3>Alerts</h3>
+              <p>
+                Alerts use <code>data-kind="alert"</code>. Add <code>dismiss</code> or
+                <code>timeout</code> when Vitre JS is loaded.
+              </p>
+              <div data-kind="alert" data-color="success" role="status" dismiss>
+                <span data-v-content>Saved successfully. This alert can be dismissed.</span>
+              </div>
+              <div data-kind="alert" data-color="warning" role="alert" dismiss timeout="12">
+                <span data-v-content>Review this warning. It can be dismissed or time out.</span>
+              </div>
+              <pre><code>&lt;div data-kind="alert" data-color="success" role="status" dismiss&gt;
   Saved successfully.
 &lt;/div&gt;</code></pre>
-      </section>
+            </section>
 
-      <section id="links">
-        <h2>Links</h2>
-        <ul>
-          <li>Vitre CSS npm: <a href="https://www.npmjs.com/package/vitre-css">https://www.npmjs.com/package/vitre-css</a></li>
-          <li>Vitre CSS repo: <a href="https://github.com/vitre-ui/vitre-css">https://github.com/vitre-ui/vitre-css</a></li>
-          <li>Vitre JS npm: <a href="https://www.npmjs.com/package/vitre-js">https://www.npmjs.com/package/vitre-js</a></li>
-          <li>Vitre JS repo: <a href="https://github.com/vitre-ui/vitre-js">https://github.com/vitre-ui/vitre-js</a></li>
-        </ul>
+            <section id="dialogs">
+              <h3>Dialogs</h3>
+              <p>Vitre styles native dialogs and dialog-like semantic regions.</p>
+              <article role="dialog" aria-labelledby="dialog-preview-title">
+                <h4 id="dialog-preview-title">Dialog Preview</h4>
+                <p>This non-modal preview uses dialog semantics without opening a native modal.</p>
+                <form method="dialog">
+                  <button type="button">Close</button>
+                </form>
+              </article>
+              <pre><code>&lt;dialog&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Confirm action&lt;/h2&gt;
+    &lt;button&gt;Close&lt;/button&gt;
+  &lt;/article&gt;
+&lt;/dialog&gt;</code></pre>
+            </section>
+
+            <section id="semantic-components">
+              <h3>Semantic Components</h3>
+              <p>Use real HTML structure first: <code>section</code>, <code>article</code>, <code>aside</code>, <code>header</code>, and <code>footer</code>.</p>
+              <article>
+                <header>
+                  <h4>Release Notes</h4>
+                  <p>A self-contained semantic card.</p>
+                </header>
+                <aside>Nested asides become callouts inside larger content.</aside>
+                <footer>
+                  <small>Version 1.5.6</small>
+                </footer>
+              </article>
+            </section>
+
+            <section id="forms">
+              <h3>Forms</h3>
+              <p>Labels, inputs, selects, textareas, fieldsets, validation states, and grouped controls are styled by default.</p>
+              <form>
+                <label>
+                  Email
+                  <input type="email" placeholder="you@example.com" required>
+                </label>
+                <label>
+                  Plan
+                  <select>
+                    <option>Starter</option>
+                    <option>Team</option>
+                    <option>Enterprise</option>
+                  </select>
+                </label>
+                <button type="submit">Save</button>
+              </form>
+            </section>
+
+            <section id="media">
+              <h3>Media</h3>
+              <p>Images, SVG, video, audio, canvas, iframes, objects, and embeds inherit sensible sizing and framing.</p>
+              <figure>
+                <svg role="img" aria-label="Abstract glass panel sample" viewBox="0 0 720 240">
+                  <rect width="720" height="240" rx="28" fill="hsl(214 88% 46% / 0.16)"></rect>
+                  <circle cx="180" cy="120" r="72" fill="hsl(168 76% 42% / 0.28)"></circle>
+                  <circle cx="540" cy="118" r="92" fill="hsl(38 92% 48% / 0.24)"></circle>
+                  <path d="M120 172 C 230 62, 356 236, 600 74" fill="none" stroke="hsl(214 88% 46%)" stroke-width="16" stroke-linecap="round"></path>
+                </svg>
+                <figcaption>Inline SVG inside a figure.</figcaption>
+              </figure>
+            </section>
+
+            <section id="css-variables">
+              <h3>CSS Variable Reference</h3>
+              <p>Override variables after loading Vitre CSS.</p>
+              <pre><code>:root {
+  --vitre-hue: 168;
+  --vitre-primary: hsl(var(--vitre-hue) 76% 42%);
+  --vitre-radius: 0.5rem;
+}</code></pre>
+
+              <h4>Color Variables</h4>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Variable</th>
+                    <th>Preview</th>
+                    <th>Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>--vitre-bg</code></td>
+                    <td><mark data-token="bg"></mark></td>
+                    <td>Page background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-text</code></td>
+                    <td><mark data-token="text"></mark></td>
+                    <td>Primary text</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-muted</code></td>
+                    <td><mark data-token="muted"></mark></td>
+                    <td>Secondary text</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-subtle</code></td>
+                    <td><mark data-token="subtle"></mark></td>
+                    <td>Low-emphasis text and quiet UI details</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-primary</code></td>
+                    <td><mark data-token="primary"></mark></td>
+                    <td>Links, focus rings, and primary actions</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-primary-ink</code></td>
+                    <td><mark data-token="primary-ink"></mark></td>
+                    <td>Text color used on primary action backgrounds</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-surface</code></td>
+                    <td><mark data-token="surface"></mark></td>
+                    <td>Panels and elevated surfaces</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-surface-strong</code></td>
+                    <td><mark data-token="surface-strong"></mark></td>
+                    <td>Higher-emphasis panel surfaces</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-surface-soft</code></td>
+                    <td><mark data-token="surface-soft"></mark></td>
+                    <td>Soft hover and subtle surface fills</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-border</code></td>
+                    <td><mark data-token="border"></mark></td>
+                    <td>Default control, table, and panel borders</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-border-strong</code></td>
+                    <td><mark data-token="border-strong"></mark></td>
+                    <td>Higher-emphasis borders</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-glass</code></td>
+                    <td><mark data-token="glass"></mark></td>
+                    <td>Translucent panel background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-glass-border</code></td>
+                    <td><mark data-token="glass-border"></mark></td>
+                    <td>Translucent panel border</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-mark</code></td>
+                    <td><mark data-token="mark"></mark></td>
+                    <td>Highlighted text background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-info</code></td>
+                    <td><mark data-token="info"></mark></td>
+                    <td>Informational states and alerts</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-info-ink</code></td>
+                    <td><mark data-token="info-ink"></mark></td>
+                    <td>Text color used on informational action backgrounds</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-info-bg</code></td>
+                    <td><mark data-token="info-bg"></mark></td>
+                    <td>Informational alert background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-success</code></td>
+                    <td><mark data-token="success"></mark></td>
+                    <td>Success states and alerts</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-success-ink</code></td>
+                    <td><mark data-token="success-ink"></mark></td>
+                    <td>Text color used on success action backgrounds</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-success-bg</code></td>
+                    <td><mark data-token="success-bg"></mark></td>
+                    <td>Success alert background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-warning</code></td>
+                    <td><mark data-token="warning"></mark></td>
+                    <td>Warning states and alerts</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-warning-ink</code></td>
+                    <td><mark data-token="warning-ink"></mark></td>
+                    <td>Text color used on warning action backgrounds</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-warning-bg</code></td>
+                    <td><mark data-token="warning-bg"></mark></td>
+                    <td>Warning alert background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-error</code></td>
+                    <td><mark data-token="error"></mark></td>
+                    <td>Error states, invalid inputs, and alerts</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-error-ink</code></td>
+                    <td><mark data-token="error-ink"></mark></td>
+                    <td>Text color used on error action backgrounds</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-error-bg</code></td>
+                    <td><mark data-token="error-bg"></mark></td>
+                    <td>Error alert background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-code-bg</code></td>
+                    <td><mark data-token="code-bg"></mark></td>
+                    <td>Inline and block code background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-code-text</code></td>
+                    <td><mark data-token="code-text"></mark></td>
+                    <td>Code text</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-code-border</code></td>
+                    <td><mark data-token="code-border"></mark></td>
+                    <td>Code block and inline code borders</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-inserted</code></td>
+                    <td><mark data-token="inserted"></mark></td>
+                    <td>Inserted document text</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-inserted-bg</code></td>
+                    <td><mark data-token="inserted-bg"></mark></td>
+                    <td>Inserted document background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-deleted</code></td>
+                    <td><mark data-token="deleted"></mark></td>
+                    <td>Deleted document text</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-deleted-bg</code></td>
+                    <td><mark data-token="deleted-bg"></mark></td>
+                    <td>Deleted document background</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h4>Variable Groups</h4>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Group</th>
+                    <th>Variables</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Color</td>
+                    <td><code>--vitre-bg</code>, <code>--vitre-text</code>, <code>--vitre-muted</code>, <code>--vitre-primary</code>, <code>--vitre-surface</code>, <code>--vitre-border</code></td>
+                  </tr>
+                  <tr>
+                    <td>Semantic Color</td>
+                    <td><code>--vitre-info</code>, <code>--vitre-success</code>, <code>--vitre-warning</code>, <code>--vitre-error</code>, <code>--vitre-*-ink</code>, <code>--vitre-*-bg</code></td>
+                  </tr>
+                  <tr>
+                    <td>Typography</td>
+                    <td><code>--vitre-font-sans</code>, <code>--vitre-font-mono</code>, <code>--vitre-font-weight</code>, <code>--vitre-leading</code>, <code>--vitre-step-*</code></td>
+                  </tr>
+                  <tr>
+                    <td>Layout</td>
+                    <td><code>--vitre-measure</code>, <code>--vitre-space-*</code>, <code>--vitre-radius</code>, <code>--vitre-shadow</code></td>
+                  </tr>
+                  <tr>
+                    <td>Controls</td>
+                    <td><code>--vitre-control-*</code>, <code>--vitre-button-*</code>, <code>--vitre-focus</code></td>
+                  </tr>
+                  <tr>
+                    <td>Components</td>
+                    <td><code>--vitre-alert-*</code>, <code>--vitre-code-*</code>, <code>--vitre-table-*</code>, <code>--vitre-indicator-color</code>, <code>--vitre-nav-gap</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer>
+    <footer data-width="wide">
       <p>
-        Vitre Docs is published from the <a href="https://github.com/vitre-ui/vitre-docs">vitre-docs</a> repository.
+        See the <a href="examples.html">comprehensive examples page</a> for an exhaustive element
+        gallery. Vitre Docs is published from the
+        <a href="https://github.com/vitre-ui/vitre-docs">vitre-docs</a> repository.
       </p>
     </footer>
     <script type="module">
       import "https://unpkg.com/vitre-js/vitre.js";
+
+      const primaryColor = document.querySelector("#primary-color");
+      const themeSelect = document.querySelector("#theme-select");
+      const root = document.documentElement;
+
+      primaryColor?.addEventListener("input", (event) => {
+        root.style.setProperty("--vitre-primary", event.target.value);
+      });
+
+      themeSelect?.addEventListener("change", (event) => {
+        const theme = event.target.value;
+
+        if (theme === "system") {
+          root.removeAttribute("data-theme");
+          return;
+        }
+
+        root.dataset.theme = theme;
+      });
     </script>
   </body>
 </html>

@@ -1,49 +1,72 @@
-:root {
-  scroll-behavior: smooth;
+body > header {
+  padding-block-start: 1rem;
 }
 
-body > header,
-body > main,
-body > footer {
-  width: min(100% - 2rem, var(--vitre-measure, 80ch));
+[data-docs-hero] {
+  margin-block: var(--vitre-space-5, 1.5rem);
+}
+
+[data-docs-hero] img {
+  display: block;
+  inline-size: min(100%, 34rem);
   margin-inline: auto;
 }
 
-body > header {
-  padding-block-start: 2rem;
+[data-docs-reference] {
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.35fr) minmax(0, 1fr);
+  gap: var(--vitre-space-5, 1.5rem);
+  align-items: start;
 }
 
-nav[aria-label="Documentation"] {
+[data-docs-reference] > aside {
   position: sticky;
-  top: 0;
-  z-index: 1;
-  padding-block: 0.75rem;
-  background: var(--vitre-bg);
+  top: 4.5rem;
 }
 
-form[role="group"] {
-  align-items: center;
+[data-docs-reference] nav {
+  display: grid;
+  gap: 0.25rem;
 }
 
-[data-kind="alert"]:has(> [data-v-content]) {
-  display: flex;
-  align-items: center;
-  gap: var(--vitre-space-3, 0.75rem);
-}
-
-[data-kind="alert"] > [data-v-content] {
-  flex: 1 1 auto;
-}
-
-[data-kind="alert"][dismiss]::after {
-  content: "";
+[data-docs-reference] nav a {
   display: block;
-  flex: 0 0 auto;
-  inline-size: 2rem;
-  block-size: 2rem;
-  margin-inline-start: auto;
+  padding: 0.45rem 0.7rem;
+  border-inline-start: 0.2rem solid transparent;
+  text-decoration: none;
 }
 
-[data-kind="alert"][data-v-enhanced="true"]::after {
-  display: none;
+[data-docs-reference] nav a:hover,
+[data-docs-reference] nav a:focus-visible {
+  border-inline-start-color: var(--vitre-primary);
+  background: var(--vitre-surface-soft);
+}
+
+[data-docs-reference-content] {
+  min-inline-size: 0;
+}
+
+[data-docs-reference-content] > section {
+  scroll-margin-block-start: 5.5rem;
+}
+
+main > section {
+  scroll-margin-block-start: 5.5rem;
+}
+
+@media (max-width: 760px) {
+  [data-docs-reference] {
+    grid-template-columns: 1fr;
+  }
+
+  [data-docs-reference] > aside {
+    position: static;
+  }
+
+  [data-docs-reference] nav {
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    overflow-x: auto;
+    padding-block-end: 0.25rem;
+  }
 }
