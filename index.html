@@ -386,21 +386,21 @@
                 <code>data-variant</code>, and semantic intent uses <code>data-color</code>.
               </p>
               <form role="group" aria-label="Button variants">
-                <button type="button">Default</button>
-                <button type="button" data-variant="flat">Flat</button>
-                <button type="button" data-variant="outline">Outline</button>
-                <button type="button" data-variant="ghost">Ghost</button>
-                <button type="button" data-variant="plain">Plain</button>
+                <button>Default</button>
+                <button data-variant="flat">Flat</button>
+                <button data-variant="outline">Outline</button>
+                <button data-variant="ghost">Ghost</button>
+                <button data-variant="plain">Plain</button>
               </form>
               <form role="group" aria-label="Button colors">
-                <button type="button" data-color="success">Save</button>
-                <button type="button" data-color="info" data-variant="outline">Details</button>
-                <button type="button" data-color="warning" data-variant="flat">Review</button>
-                <button type="button" data-color="error" data-variant="ghost">Delete</button>
+                <button data-color="success">Save</button>
+                <button data-color="info" data-variant="outline">Details</button>
+                <button data-color="warning" data-variant="flat">Review</button>
+                <button data-color="error" data-variant="ghost">Delete</button>
               </form>
-              <pre><code>&lt;button type="button"&gt;Default&lt;/button&gt;
-&lt;button type="button" data-variant="flat"&gt;Flat&lt;/button&gt;
-&lt;button type="button" data-variant="outline" data-color="error"&gt;Delete&lt;/button&gt;</code></pre>
+              <pre><code>&lt;button&gt;Default&lt;/button&gt;
+&lt;button data-variant="flat"&gt;Flat&lt;/button&gt;
+&lt;button data-variant="outline" data-color="error"&gt;Delete&lt;/button&gt;</code></pre>
             </section>
 
             <section id="alerts">
@@ -455,7 +455,10 @@
 
             <section id="forms">
               <h3>Forms</h3>
-              <p>Labels, inputs, selects, textareas, fieldsets, validation states, and grouped controls are styled by default.</p>
+              <p>
+                Labels, inputs, selects, textareas, fieldsets, validation states, and grouped
+                controls are styled by default.
+              </p>
               <form>
                 <label>
                   Email
@@ -471,6 +474,7 @@
                 </label>
                 <button type="submit">Save</button>
               </form>
+              <p>Within forms, use <code>type="button"</code> for buttons that should not submit the form.</p>
             </section>
 
             <section id="media">
