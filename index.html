@@ -121,6 +121,13 @@
           </span>
         </p>
 
+        <p>
+          <code>vitre-base.css</code> is an optional first-paint baseline that sets the Vitre theme,
+          typography, background, and page-width styles immediately — before the CDN stylesheet loads.
+          Serving it locally prevents the flash. You can copy the file from the
+          <code>vitre-css</code> npm package or the unpkg CDN.
+        </p>
+
         <pre><code>&lt;link rel="stylesheet" href="/vitre-base.css"&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css"&gt;</code></pre>
       </section>
@@ -212,6 +219,7 @@
               <a href="#buttons">Buttons</a>
               <a href="#alerts">Alerts</a>
               <a href="#dialogs">Dialogs</a>
+              <a href="#splitter">Splitter</a>
               <a href="#semantic-components">Semantic Components</a>
               <a href="#forms">Forms</a>
               <a href="#media">Media</a>
@@ -242,8 +250,8 @@
                   </tr>
                   <tr>
                     <td><code>data-kind</code></td>
-                    <td><code>alert</code>, <code>theme-toggle</code></td>
-                    <td><code>div</code>, <code>p</code>, or another semantic container</td>
+                    <td><code>alert</code>, <code>theme-toggle</code>, <code>splitter</code></td>
+                    <td><code>div</code>, <code>p</code>, <code>span</code>, or another semantic container</td>
                     <td>Marks a semantic component for Vitre styling or optional Vitre JS behavior.</td>
                   </tr>
                   <tr>
@@ -271,6 +279,12 @@
                     <td>Renders a token color swatch for documentation and examples.</td>
                   </tr>
                   <tr>
+                    <td><code>data-width</code></td>
+                    <td><code>narrow</code>, <code>wide</code>, <code>wide-80</code>, <code>full</code></td>
+                    <td>Direct <code>body</code> children (<code>header</code>, <code>main</code>, <code>nav</code>, etc.)</td>
+                    <td>Overrides the default <code>--vitre-measure</code> max-width for that element. <code>narrow</code> = 72ch, <code>wide</code> = 72rem, <code>wide-80</code> = 80vw, <code>full</code> = 100%.</td>
+                  </tr>
+                  <tr>
                     <td><code>dismiss</code></td>
                     <td>Boolean attribute</td>
                     <td><code>[data-kind="alert"]</code></td>
@@ -281,6 +295,12 @@
                     <td>Seconds, such as <code>6</code> or <code>12</code></td>
                     <td><code>[data-kind="alert"]</code></td>
                     <td>Lets Vitre JS dismiss the alert automatically after the given delay.</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-v-content</code></td>
+                    <td>Boolean attribute</td>
+                    <td>Child element inside <code>[data-kind="alert"]</code></td>
+                    <td>Required wrapper for alert text content when <code>dismiss</code> is present. Reserves the layout slot so the dismiss button aligns correctly before Vitre JS loads.</td>
                   </tr>
                 </tbody>
               </table>
@@ -409,6 +429,11 @@
                 Alerts use <code>data-kind="alert"</code>. Add <code>dismiss</code> or
                 <code>timeout</code> when Vitre JS is loaded.
               </p>
+              <p>
+                When using <code>dismiss</code>, wrap the alert text in a child element with
+                <code>data-v-content</code>. This reserves the layout slot for the close button
+                so the alert doesn't reflow when Vitre JS injects it.
+              </p>
               <div data-kind="alert" data-color="success" role="status" dismiss>
                 <span data-v-content>Saved successfully. This alert can be dismissed.</span>
               </div>
@@ -416,7 +441,7 @@
                 <span data-v-content>Review this warning. It can be dismissed or time out.</span>
               </div>
               <pre><code>&lt;div data-kind="alert" data-color="success" role="status" dismiss&gt;
-  Saved successfully.
+  &lt;span data-v-content&gt;Saved successfully.&lt;/span&gt;
 &lt;/div&gt;</code></pre>
             </section>
 
@@ -436,6 +461,49 @@
     &lt;button&gt;Close&lt;/button&gt;
   &lt;/article&gt;
 &lt;/dialog&gt;</code></pre>
+            </section>
+
+            <section id="splitter">
+              <h3>Splitter</h3>
+              <p>
+                A <code>[data-kind="splitter"]</code> with <code>role="separator"</code> renders a
+                resizable divider handle between two panels. It supports both vertical
+                (<code>cursor: col-resize</code>) and horizontal
+                (<code>aria-orientation="horizontal"</code>, <code>cursor: row-resize</code>)
+                orientations. The handle highlights on hover, focus, and when actively dragged.
+              </p>
+              <pre><code>&lt;!-- Vertical splitter between two panels --&gt;
+&lt;div style="display: flex"&gt;
+  &lt;div&gt;Left panel&lt;/div&gt;
+  &lt;span data-kind="splitter" role="separator" aria-valuenow="50"&gt;&lt;/span&gt;
+  &lt;div&gt;Right panel&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Variable</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>--vitre-splitter-size</code></td>
+                    <td><code>0.375rem</code></td>
+                    <td>Width (or height for horizontal) of the splitter handle</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-splitter-bg</code></td>
+                    <td><code>var(--vitre-border)</code></td>
+                    <td>Default handle background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-splitter-active-bg</code></td>
+                    <td><code>var(--vitre-primary)</code></td>
+                    <td>Handle background on hover, focus, or active drag</td>
+                  </tr>
+                </tbody>
+              </table>
             </section>
 
             <section id="semantic-components">
