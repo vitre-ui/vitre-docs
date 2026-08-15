@@ -19,6 +19,7 @@
       <a href="#getting-started">Getting Started</a>
       <a href="#directives">Directives</a>
       <a href="#reference">Reference</a>
+      <a href="components.html">Components</a>
       <a href="examples.html">Examples</a>
     </nav>
 
@@ -29,10 +30,10 @@
 
       <h1>Vitre UI Documentation</h1>
       <p>Vitre UI is the transparent style layer and styleless behavior layer for semantic HTML.</p>
-      <p>Vitre UI is made of two small packages:</p>
+      <p>Vitre UI is one small package with two files:</p>
       <ul>
-        <li><strong>Vitre CSS</strong> - gives ordinary semantic HTML a polished interface treatment.</li>
-        <li><strong>Vitre JS</strong> - adds optional behavior to semantic component patterns without owning your rendering model.</li>
+        <li><strong><code>vitre.css</code></strong> - gives ordinary semantic HTML a polished interface treatment.</li>
+        <li><strong><code>vitre.js</code></strong> - optional; adds behavior to semantic component patterns without owning your rendering model.</li>
       </ul>
       <p data-kind="alert" data-color="info">
         <span data-v-content>
@@ -54,19 +55,19 @@
         <table>
           <thead>
             <tr>
-              <th>Package</th>
+              <th>File</th>
               <th>Role</th>
               <th>Use it when</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>vitre-css</code></td>
+              <td><code>vitre.css</code></td>
               <td>Classless styling</td>
               <td>You want semantic elements, forms, tables, code, dialogs, and alerts styled by default.</td>
             </tr>
             <tr>
-              <td><code>vitre-js</code></td>
+              <td><code>vitre.js</code></td>
               <td>Optional behavior</td>
               <td>You want progressive interactivity for Vitre-compatible semantic component markup.</td>
             </tr>
@@ -76,20 +77,34 @@
 
       <section id="installation">
         <h2>Installation</h2>
-        <p>Install the packages you need from npm.</p>
+        <p>Install the package from npm.</p>
 
-        <pre><code>pnpm add vitre-css vitre-js</code></pre>
+        <pre><code>pnpm add vitre-css</code></pre>
 
         <p>For static pages without a build step, load the browser files from unpkg.</p>
 
         <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre-base.css"&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css"&gt;
-&lt;script type="module" src="https://unpkg.com/vitre-js/vitre.js"&gt;&lt;/script&gt;</code></pre>
+&lt;script type="module" src="https://unpkg.com/vitre-css/vitre.js"&gt;&lt;/script&gt;</code></pre>
+
+        <p>
+          The script tag is optional. Leave it out and every component still renders as styled,
+          readable content &mdash; see the <a href="components.html">Components</a> page for what
+          each one does without JavaScript.
+        </p>
 
         <p>
           The unversioned unpkg URLs resolve to the latest published npm versions quickly. Use a
-          pinned URL such as <code>https://unpkg.com/vitre-css@1.5.10/vitre.css</code> when a page
+          pinned URL such as <code>https://unpkg.com/vitre-css@1.6.0/vitre.css</code> when a page
           needs a fixed dependency version.
+        </p>
+
+        <p data-kind="alert" data-color="info">
+          <span data-v-content>
+            <code>vitre-js</code> merged into <code>vitre-css</code> in 1.6.0. If you still load
+            <code>unpkg.com/vitre-js/vitre.js</code>, switch to
+            <code>unpkg.com/vitre-css/vitre.js</code>.
+          </span>
         </p>
       </section>
 
@@ -157,7 +172,11 @@
             <tr>
               <td><code>data-kind</code></td>
               <td>CSS and JS</td>
-              <td>Identify semantic component patterns such as <code>alert</code> and <code>theme-toggle</code>.</td>
+              <td>
+                Identify semantic component patterns: <code>alert</code>, <code>tabs</code>,
+                <code>splitter</code>, <code>nav</code>, and <code>theme-toggle</code>. See
+                <a href="components.html">Components</a>.
+              </td>
             </tr>
             <tr>
               <td><code>data-color</code></td>
@@ -206,7 +225,13 @@
 
       <section id="reference">
         <h2>Reference</h2>
-        <p>Use the reference sections for markup patterns, live examples, and relevant tokens.</p>
+        <p>Use the reference sections for directives, design tokens, and element-level styling.</p>
+        <p data-kind="alert" data-color="info">
+          <span data-v-content>
+            Component markup, live demos, and behavior now live on the
+            <a href="components.html">Components</a> page.
+          </span>
+        </p>
 
         <div data-docs-reference>
           <aside>
@@ -216,11 +241,6 @@
               <a href="#themes">Themes</a>
               <a href="#typography">Typography</a>
               <a href="#lists">Lists</a>
-              <a href="#buttons">Buttons</a>
-              <a href="#alerts">Alerts</a>
-              <a href="#dialogs">Dialogs</a>
-              <a href="#splitter">Splitter</a>
-              <a href="#semantic-components">Semantic Components</a>
               <a href="#forms">Forms</a>
               <a href="#media">Media</a>
               <a href="#css-variables">CSS Variables</a>
@@ -250,7 +270,7 @@
                   </tr>
                   <tr>
                     <td><code>data-kind</code></td>
-                    <td><code>alert</code>, <code>theme-toggle</code>, <code>splitter</code></td>
+                    <td><code>alert</code>, <code>tabs</code>, <code>splitter</code>, <code>nav</code>, <code>theme-toggle</code></td>
                     <td><code>div</code>, <code>p</code>, <code>span</code>, or another semantic container</td>
                     <td>Marks a semantic component for Vitre styling or optional Vitre JS behavior.</td>
                   </tr>
@@ -399,127 +419,10 @@
               </ol>
             </section>
 
-            <section id="buttons">
-              <h3>Buttons</h3>
-              <p>
-                Native buttons receive a complete default treatment. Variants use
-                <code>data-variant</code>, and semantic intent uses <code>data-color</code>.
-              </p>
-              <form role="group" aria-label="Button variants">
-                <button>Default</button>
-                <button data-variant="flat">Flat</button>
-                <button data-variant="outline">Outline</button>
-                <button data-variant="ghost">Ghost</button>
-                <button data-variant="plain">Plain</button>
-              </form>
-              <form role="group" aria-label="Button colors">
-                <button data-color="success">Save</button>
-                <button data-color="info" data-variant="outline">Details</button>
-                <button data-color="warning" data-variant="flat">Review</button>
-                <button data-color="error" data-variant="ghost">Delete</button>
-              </form>
-              <pre><code>&lt;button&gt;Default&lt;/button&gt;
-&lt;button data-variant="flat"&gt;Flat&lt;/button&gt;
-&lt;button data-variant="outline" data-color="error"&gt;Delete&lt;/button&gt;</code></pre>
-            </section>
 
-            <section id="alerts">
-              <h3>Alerts</h3>
-              <p>
-                Alerts use <code>data-kind="alert"</code>. Add <code>dismiss</code> or
-                <code>timeout</code> when Vitre JS is loaded.
-              </p>
-              <p>
-                When using <code>dismiss</code>, wrap the alert text in a child element with
-                <code>data-v-content</code>. This reserves the layout slot for the close button
-                so the alert doesn't reflow when Vitre JS injects it.
-              </p>
-              <div data-kind="alert" data-color="success" role="status" dismiss>
-                <span data-v-content>Saved successfully. This alert can be dismissed.</span>
-              </div>
-              <div data-kind="alert" data-color="warning" role="alert" dismiss timeout="12">
-                <span data-v-content>Review this warning. It can be dismissed or time out.</span>
-              </div>
-              <pre><code>&lt;div data-kind="alert" data-color="success" role="status" dismiss&gt;
-  &lt;span data-v-content&gt;Saved successfully.&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-            </section>
 
-            <section id="dialogs">
-              <h3>Dialogs</h3>
-              <p>Vitre styles native dialogs and dialog-like semantic regions.</p>
-              <article role="dialog" aria-labelledby="dialog-preview-title">
-                <h4 id="dialog-preview-title">Dialog Preview</h4>
-                <p>This non-modal preview uses dialog semantics without opening a native modal.</p>
-                <form method="dialog">
-                  <button type="button">Close</button>
-                </form>
-              </article>
-              <pre><code>&lt;dialog&gt;
-  &lt;article&gt;
-    &lt;h2&gt;Confirm action&lt;/h2&gt;
-    &lt;button&gt;Close&lt;/button&gt;
-  &lt;/article&gt;
-&lt;/dialog&gt;</code></pre>
-            </section>
 
-            <section id="splitter">
-              <h3>Splitter</h3>
-              <p>
-                A <code>[data-kind="splitter"]</code> with <code>role="separator"</code> renders a
-                resizable divider handle between two panels. It supports both vertical
-                (<code>cursor: col-resize</code>) and horizontal
-                (<code>aria-orientation="horizontal"</code>, <code>cursor: row-resize</code>)
-                orientations. The handle highlights on hover, focus, and when actively dragged.
-              </p>
-              <pre><code>&lt;!-- Vertical splitter between two panels --&gt;
-&lt;div style="display: flex"&gt;
-  &lt;div&gt;Left panel&lt;/div&gt;
-  &lt;span data-kind="splitter" role="separator" aria-valuenow="50"&gt;&lt;/span&gt;
-  &lt;div&gt;Right panel&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Variable</th>
-                    <th>Default</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><code>--vitre-splitter-size</code></td>
-                    <td><code>0.375rem</code></td>
-                    <td>Width (or height for horizontal) of the splitter handle</td>
-                  </tr>
-                  <tr>
-                    <td><code>--vitre-splitter-bg</code></td>
-                    <td><code>var(--vitre-border)</code></td>
-                    <td>Default handle background</td>
-                  </tr>
-                  <tr>
-                    <td><code>--vitre-splitter-active-bg</code></td>
-                    <td><code>var(--vitre-primary)</code></td>
-                    <td>Handle background on hover, focus, or active drag</td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
 
-            <section id="semantic-components">
-              <h3>Semantic Components</h3>
-              <p>Use real HTML structure first: <code>section</code>, <code>article</code>, <code>aside</code>, <code>header</code>, and <code>footer</code>.</p>
-              <article>
-                <header>
-                  <h4>Release Notes</h4>
-                  <p>A self-contained semantic card.</p>
-                </header>
-                <aside>Nested asides become callouts inside larger content.</aside>
-                <footer>
-                  <small>Version 1.5.10</small>
-                </footer>
-              </article>
-            </section>
 
             <section id="forms">
               <h3>Forms</h3>
@@ -801,7 +704,89 @@
                   </tr>
                   <tr>
                     <td>Components</td>
-                    <td><code>--vitre-alert-*</code>, <code>--vitre-code-*</code>, <code>--vitre-table-*</code>, <code>--vitre-indicator-color</code>, <code>--vitre-nav-gap</code></td>
+                    <td><code>--vitre-alert-*</code>, <code>--vitre-tab-*</code>, <code>--vitre-tablist-*</code>, <code>--vitre-splitter-*</code>, <code>--vitre-code-*</code>, <code>--vitre-table-*</code>, <code>--vitre-indicator-color</code>, <code>--vitre-nav-gap</code></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h4>Component Variables</h4>
+              <p>
+                Markup and behavior for these components are on the
+                <a href="components.html">Components</a> page.
+              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Variable</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>--vitre-splitter-size</code></td>
+                    <td><code>0.375rem</code></td>
+                    <td>Width (or height for horizontal) of the splitter handle</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-splitter-bg</code></td>
+                    <td><code>var(--vitre-border)</code></td>
+                    <td>Default handle background</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-splitter-active-bg</code></td>
+                    <td><code>var(--vitre-primary)</code></td>
+                    <td>Handle background on hover, focus, or active drag</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-color</code></td>
+                    <td><code>var(--vitre-subtle)</code></td>
+                    <td>Resting tab label color</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-hover-color</code></td>
+                    <td><code>var(--vitre-text)</code></td>
+                    <td>Tab label color on hover</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-hover-bg</code></td>
+                    <td><code>var(--vitre-surface-soft)</code></td>
+                    <td>Tab background on hover</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-active-color</code></td>
+                    <td><code>var(--vitre-primary)</code></td>
+                    <td>Selected tab label and indicator color</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-indicator-width</code></td>
+                    <td><code>0.14rem</code></td>
+                    <td>Thickness of the selected-tab indicator</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-gap</code></td>
+                    <td><code>0.15rem</code></td>
+                    <td>Gap between adjacent tabs</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-padding-block</code></td>
+                    <td><code>0.6rem</code></td>
+                    <td>Vertical padding inside a tab</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-padding-inline</code></td>
+                    <td><code>0.9rem</code></td>
+                    <td>Horizontal padding inside a tab</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tablist-border</code></td>
+                    <td><code>var(--vitre-border)</code></td>
+                    <td>Rule along the tab strip</td>
+                  </tr>
+                  <tr>
+                    <td><code>--vitre-tab-panel-padding-block</code></td>
+                    <td><code>var(--vitre-space-4)</code></td>
+                    <td>Space above the active panel</td>
                   </tr>
                 </tbody>
               </table>
@@ -819,7 +804,7 @@
       </p>
     </footer>
     <script type="module">
-      import "https://unpkg.com/vitre-js/vitre.js";
+      import "https://unpkg.com/vitre-css/vitre.js";
 
       const primaryColor = document.querySelector("#primary-color");
       const themeSelect = document.querySelector("#theme-select");

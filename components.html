@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Component reference for Vitre UI: markup, live demos, and behavior for every data-kind component."
+    >
+    <title>Vitre UI Components</title>
+    <link rel="stylesheet" href="/vitre-base.css">
+    <link rel="stylesheet" href="https://unpkg.com/vitre-css/vitre.css">
+    <link rel="stylesheet" href="/site.css">
+  </head>
+  <body>
+    <nav aria-label="Documentation" data-width="wide">
+      <a href="index.html">Docs</a>
+      <a href="#anatomy">Anatomy</a>
+      <a href="#alerts">Alerts</a>
+      <a href="#tabs">Tabs</a>
+      <a href="#splitter">Splitter</a>
+      <a href="#navigation">Navigation</a>
+      <a href="#theme-toggle">Theme</a>
+      <a href="examples.html">Examples</a>
+    </nav>
+
+    <header data-width="wide">
+      <h1>Vitre UI Components</h1>
+      <p>
+        Components are ordinary semantic HTML marked with a <code>data-kind</code> directive. Vitre
+        CSS styles them, and Vitre JS adds behavior to the ones that need it.
+      </p>
+      <p data-kind="alert" data-color="info">
+        <span data-v-content>
+          Every component on this page degrades without JavaScript. Load <code>vitre.css</code>
+          alone and the markup still renders as readable, styled content.
+        </span>
+      </p>
+    </header>
+
+    <main data-width="wide">
+      <section id="anatomy">
+        <h2>Component Anatomy</h2>
+        <p>
+          A Vitre component is not a custom element and not a class name. It is a semantic element
+          carrying a <code>data-kind</code> directive, plus the ARIA roles the pattern already
+          calls for. That means you can adopt one component without adopting a framework, and
+          remove one by deleting an attribute.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Directive</th>
+              <th>Needs JS</th>
+              <th>Without JS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="#alerts">Alert</a></td>
+              <td><code>data-kind="alert"</code></td>
+              <td>Only for <code>dismiss</code> and <code>timeout</code></td>
+              <td>Renders as a styled, permanent alert</td>
+            </tr>
+            <tr>
+              <td><a href="#tabs">Tabs</a></td>
+              <td><code>data-kind="tabs"</code></td>
+              <td>Yes, for selection</td>
+              <td>Tab strip hides, all panels stack</td>
+            </tr>
+            <tr>
+              <td><a href="#splitter">Splitter</a></td>
+              <td><code>data-kind="splitter"</code></td>
+              <td>Only for focus and orientation</td>
+              <td>Renders as a styled divider</td>
+            </tr>
+            <tr>
+              <td><a href="#navigation">Navigation</a></td>
+              <td><code>data-kind="nav"</code></td>
+              <td>Yes, for SPA routing</td>
+              <td>Links navigate normally</td>
+            </tr>
+            <tr>
+              <td><a href="#theme-toggle">Theme toggle</a></td>
+              <td><code>data-kind="theme-toggle"</code></td>
+              <td>Yes, to render the button</td>
+              <td>Nothing renders; theme follows the OS</td>
+            </tr>
+            <tr>
+              <td><a href="#buttons">Buttons</a></td>
+              <td><code>data-variant</code>, <code>data-color</code></td>
+              <td>No</td>
+              <td>Fully styled</td>
+            </tr>
+            <tr>
+              <td><a href="#dialogs">Dialogs</a></td>
+              <td><code>role="dialog"</code>, <code>&lt;dialog&gt;</code></td>
+              <td>No</td>
+              <td>Fully styled</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          CSS custom properties for every component live in the
+          <a href="index.html#css-variables">CSS Variable Reference</a>.
+        </p>
+      </section>
+
+      <div data-docs-reference>
+        <aside>
+          <nav aria-label="Components">
+            <a href="#alerts">Alerts</a>
+            <a href="#tabs">Tabs</a>
+            <a href="#splitter">Splitter</a>
+            <a href="#navigation">Navigation</a>
+            <a href="#theme-toggle">Theme Toggle</a>
+            <a href="#buttons">Buttons</a>
+            <a href="#dialogs">Dialogs</a>
+            <a href="#semantic-components">Semantic Components</a>
+          </nav>
+        </aside>
+
+        <div data-docs-reference-content>
+          <section id="alerts">
+            <h3>Alerts</h3>
+            <p>
+              An alert is any element with <code>data-kind="alert"</code>. Use
+              <code>data-color</code> for intent, and add <code>role="status"</code> or
+              <code>role="alert"</code> only when live-region announcement is wanted.
+            </p>
+
+            <div data-kind="tabs">
+              <div role="tablist" aria-label="Alerts">
+                <button role="tab">Demo</button>
+                <button role="tab">HTML</button>
+                <button role="tab">Behavior</button>
+              </div>
+
+              <section role="tabpanel">
+                <h4>Demo</h4>
+                <div data-kind="alert" data-color="info" role="status">
+                  <span data-v-content>A plain informational alert.</span>
+                </div>
+                <div data-kind="alert" data-color="success" role="status" dismiss>
+                  <span data-v-content>Saved successfully. This one can be dismissed.</span>
+                </div>
+                <div data-kind="alert" data-color="warning" role="alert" dismiss timeout="12">
+                  <span data-v-content>This one dismisses itself after twelve seconds.</span>
+                </div>
+                <div data-kind="alert" data-color="error" role="alert">
+                  <span data-v-content>Something went wrong.</span>
+                </div>
+              </section>
+
+              <section role="tabpanel">
+                <h4>HTML</h4>
+                <pre><code>&lt;div data-kind="alert" data-color="success" role="status" dismiss&gt;
+  &lt;span data-v-content&gt;Saved successfully.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div data-kind="alert" data-color="warning" role="alert" dismiss timeout="12"&gt;
+  &lt;span data-v-content&gt;Dismisses itself after twelve seconds.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+                <p>
+                  When using <code>dismiss</code>, wrap the text in a child carrying
+                  <code>data-v-content</code>. That reserves the layout slot for the close button so
+                  the alert does not reflow when Vitre JS injects it.
+                </p>
+              </section>
+
+              <section role="tabpanel">
+                <h4>Behavior</h4>
+                <table>
+                  <thead>
+                    <tr><th>Attribute</th><th>Effect</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>dismiss</code></td>
+                      <td>Appends a ghost icon button that removes the alert.</td>
+                    </tr>
+                    <tr>
+                      <td><code>timeout="12"</code></td>
+                      <td>Removes the alert after the given number of seconds.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  Removal emits a bubbling <code>vitre:dismiss</code> event whose
+                  <code>detail.source</code> is the alert element.
+                </p>
+                <pre><code>document.addEventListener("vitre:dismiss", (event) =&gt; {
+  console.log("dismissed", event.detail.source);
+});</code></pre>
+                <p>Without Vitre JS the alert renders as a styled, permanent block.</p>
+              </section>
+            </div>
+          </section>
+
+          <section id="tabs">
+            <h3>Tabs</h3>
+            <p>
+              Wrap a <code>role="tablist"</code> and its <code>role="tabpanel"</code> sections in
+              <code>data-kind="tabs"</code>. You write the roles the pattern already requires;
+              Vitre JS generates the rest of the ARIA wiring. Every tabbed panel on this page is
+              this component.
+            </p>
+
+            <div data-kind="tabs">
+              <div role="tablist" aria-label="Tabs">
+                <button role="tab">Demo</button>
+                <button role="tab">HTML</button>
+                <button role="tab">Behavior</button>
+                <button role="tab">Vertical</button>
+              </div>
+
+              <section role="tabpanel">
+                <h4>Demo</h4>
+                <p>You are looking at it. The strip above is a tablist and this is its first panel.</p>
+                <div data-kind="alert" data-color="info" role="status">
+                  <span data-v-content>Tabs can contain any content, including other components.</span>
+                </div>
+              </section>
+
+              <section role="tabpanel">
+                <h4>HTML</h4>
+                <pre><code>&lt;div data-kind="tabs"&gt;
+  &lt;div role="tablist" aria-label="Account settings"&gt;
+    &lt;button role="tab"&gt;Profile&lt;/button&gt;
+    &lt;button role="tab"&gt;Notifications&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;section role="tabpanel"&gt;
+    &lt;h4&gt;Profile&lt;/h4&gt;
+    &lt;p&gt;Profile settings.&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section role="tabpanel"&gt;
+    &lt;h4&gt;Notifications&lt;/h4&gt;
+    &lt;p&gt;Notification settings.&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+                <p>
+                  Tabs pair with panels in document order. When the order differs, point a tab at
+                  its panel explicitly with <code>aria-controls</code>.
+                </p>
+              </section>
+
+              <section role="tabpanel">
+                <h4>Behavior</h4>
+                <p>Vitre JS generates every attribute you did not write:</p>
+                <ul>
+                  <li>Missing <code>id</code> values on tabs and panels</li>
+                  <li><code>aria-controls</code> and <code>aria-labelledby</code> pairing</li>
+                  <li><code>aria-selected</code> and a roving <code>tabindex</code></li>
+                  <li><code>type="button"</code> on tab buttons, so they never submit a form</li>
+                </ul>
+
+                <table>
+                  <thead>
+                    <tr><th>Key</th><th>Action</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>Previous or next tab, wrapping at both ends</td></tr>
+                    <tr><td><kbd>&uarr;</kbd> <kbd>&darr;</kbd></td><td>Same, when the tablist is vertical</td></tr>
+                    <tr><td><kbd>Home</kbd></td><td>First tab</td></tr>
+                    <tr><td><kbd>End</kbd></td><td>Last tab</td></tr>
+                  </tbody>
+                </table>
+
+                <p>
+                  Set <code>aria-selected="true"</code> on a tab to choose the initial panel;
+                  otherwise the first is selected. Changing tabs emits a bubbling
+                  <code>vitre:tabchange</code> event.
+                </p>
+                <pre><code>document.addEventListener("vitre:tabchange", (event) =&gt; {
+  console.log(event.detail.index, event.detail.panel);
+});</code></pre>
+
+                <p>
+                  Without Vitre JS the tab strip is hidden and every panel renders stacked, so give
+                  each panel a heading. Content stays reachable instead of leaving dead buttons
+                  behind.
+                </p>
+              </section>
+
+              <section role="tabpanel">
+                <h4>Vertical</h4>
+                <p>Add <code>aria-orientation="vertical"</code> to the tablist.</p>
+                <pre><code>&lt;div role="tablist" aria-orientation="vertical"&gt;</code></pre>
+                <div data-kind="tabs">
+                  <div role="tablist" aria-orientation="vertical" aria-label="Vertical example">
+                    <button role="tab">First</button>
+                    <button role="tab">Second</button>
+                  </div>
+                  <section role="tabpanel"><p>First vertical panel.</p></section>
+                  <section role="tabpanel"><p>Second vertical panel.</p></section>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section id="splitter">
+            <h3>Splitter</h3>
+            <p>
+              A <code>data-kind="splitter"</code> with <code>role="separator"</code> renders a
+              resizable divider handle between two panels. It highlights on hover, on focus, and
+              while being dragged.
+            </p>
+
+            <div data-kind="tabs">
+              <div role="tablist" aria-label="Splitter">
+                <button role="tab">Demo</button>
+                <button role="tab">HTML</button>
+                <button role="tab">Behavior</button>
+              </div>
+
+              <section role="tabpanel">
+                <h4>Demo</h4>
+                <div style="display: flex; align-items: stretch; min-block-size: 6rem;">
+                  <div style="flex: 1 1 50%; padding: 0.75rem;">Left panel</div>
+                  <span data-kind="splitter" role="separator" aria-valuenow="50"></span>
+                  <div style="flex: 1 1 50%; padding: 0.75rem;">Right panel</div>
+                </div>
+                <p><small>Tab to the handle to see the focus treatment.</small></p>
+              </section>
+
+              <section role="tabpanel">
+                <h4>HTML</h4>
+                <pre><code>&lt;div style="display: flex"&gt;
+  &lt;div&gt;Left panel&lt;/div&gt;
+  &lt;span data-kind="splitter" role="separator" aria-valuenow="50"&gt;&lt;/span&gt;
+  &lt;div&gt;Right panel&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <p>
+                  For a horizontal divider add <code>aria-orientation="horizontal"</code>, which
+                  switches the cursor to <code>row-resize</code>.
+                </p>
+              </section>
+
+              <section role="tabpanel">
+                <h4>Behavior</h4>
+                <p>
+                  Vitre JS makes the handle focusable and gives it a default
+                  <code>aria-orientation</code> when one is not supplied. Pane sizing stays your
+                  application's responsibility &mdash; Vitre does not own your layout model.
+                </p>
+              </section>
+            </div>
+          </section>
+
+          <section id="navigation">
+            <h3>Navigation</h3>
+            <p>
+              <code>data-kind="nav"</code> on a semantic navigation region adds class-free
+              same-origin routing behavior to ordinary anchors.
+            </p>
+
+            <div data-kind="tabs">
+              <div role="tablist" aria-label="Navigation">
+                <button role="tab">HTML</button>
+                <button role="tab">Behavior</button>
+              </div>
+
+              <section role="tabpanel">
+                <h4>HTML</h4>
+                <pre><code>&lt;nav data-kind="nav" aria-label="Primary navigation"&gt;
+  &lt;a href="/"&gt;Home&lt;/a&gt;
+  &lt;a href="/videos"&gt;Videos&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+              </section>
+
+              <section role="tabpanel">
+                <h4>Behavior</h4>
+                <p>Vitre JS intercepts same-origin primary clicks and:</p>
+                <ul>
+                  <li>Pushes the new URL with <code>history.pushState</code></li>
+                  <li>Dispatches <code>popstate</code> so history-based routers react</li>
+                  <li>Maintains <code>aria-current="page"</code> on the active link</li>
+                </ul>
+                <p>
+                  External links, downloads, modified clicks, and any <code>target</code> other than
+                  <code>_self</code> keep normal browser behavior. Each intercepted link emits a
+                  cancelable <code>vitre:navigate</code> event, so a framework router can take over
+                  while you keep semantic anchors.
+                </p>
+                <pre><code>anchor.addEventListener("vitre:navigate", (event) =&gt; {
+  event.preventDefault();
+  router.go(event.detail.path);
+});</code></pre>
+              </section>
+            </div>
+          </section>
+
+          <section id="theme-toggle">
+            <h3>Theme Toggle</h3>
+            <p>
+              An empty element with <code>data-kind="theme-toggle"</code> becomes a light/dark
+              switch. Vitre JS renders the button, so nothing appears without it.
+            </p>
+
+            <div data-kind="tabs">
+              <div role="tablist" aria-label="Theme toggle">
+                <button role="tab">Demo</button>
+                <button role="tab">HTML</button>
+                <button role="tab">Behavior</button>
+              </div>
+
+              <section role="tabpanel">
+                <h4>Demo</h4>
+                <p>Toggle this page between light and dark: <span data-kind="theme-toggle"></span></p>
+              </section>
+
+              <section role="tabpanel">
+                <h4>HTML</h4>
+                <pre><code>&lt;span data-kind="theme-toggle"&gt;&lt;/span&gt;</code></pre>
+              </section>
+
+              <section role="tabpanel">
+                <h4>Behavior</h4>
+                <p>
+                  The generated button toggles <code>data-theme</code> between
+                  <code>light</code> and <code>dark</code> on the root <code>&lt;html&gt;</code>
+                  element and stores the choice in <code>localStorage</code> under
+                  <code>vitre-theme</code>. The stored value is restored on the next page load,
+                  before components are enhanced.
+                </p>
+                <p>
+                  With no stored preference and no <code>data-theme</code>, Vitre follows the
+                  operating system through <code>prefers-color-scheme</code>.
+                </p>
+              </section>
+            </div>
+          </section>
+
+          <section id="buttons">
+            <h3>Buttons</h3>
+            <p>
+              Native buttons receive a complete default treatment with no JavaScript. Variants use
+              <code>data-variant</code>, and semantic intent uses <code>data-color</code>.
+            </p>
+
+            <div data-kind="tabs">
+              <div role="tablist" aria-label="Buttons">
+                <button role="tab">Demo</button>
+                <button role="tab">HTML</button>
+              </div>
+
+              <section role="tabpanel">
+                <h4>Demo</h4>
+                <form role="group" aria-label="Button variants">
+                  <button type="button">Default</button>
+                  <button type="button" data-variant="flat">Flat</button>
+                  <button type="button" data-variant="outline">Outline</button>
+                  <button type="button" data-variant="ghost">Ghost</button>
+                  <button type="button" data-variant="plain">Plain</button>
+                </form>
+                <form role="group" aria-label="Button colors">
+                  <button type="button" data-color="success">Save</button>
+                  <button type="button" data-color="info" data-variant="outline">Details</button>
+                  <button type="button" data-color="warning" data-variant="flat">Review</button>
+                  <button type="button" data-color="error" data-variant="ghost">Delete</button>
+                </form>
+              </section>
+
+              <section role="tabpanel">
+                <h4>HTML</h4>
+                <pre><code>&lt;button&gt;Default&lt;/button&gt;
+&lt;button data-variant="flat"&gt;Flat&lt;/button&gt;
+&lt;button data-variant="outline" data-color="error"&gt;Delete&lt;/button&gt;</code></pre>
+                <p>
+                  Each variant decides whether <code>data-color</code> is used as a fill,
+                  foreground, border, or hover tint. The same <code>data-color</code> values also
+                  apply to <code>progress</code> and <code>meter</code>.
+                </p>
+              </section>
+            </div>
+          </section>
+
+          <section id="dialogs">
+            <h3>Dialogs</h3>
+            <p>Vitre styles native dialogs and dialog-like semantic regions, with no JavaScript.</p>
+
+            <div data-kind="tabs">
+              <div role="tablist" aria-label="Dialogs">
+                <button role="tab">Demo</button>
+                <button role="tab">HTML</button>
+              </div>
+
+              <section role="tabpanel">
+                <h4>Demo</h4>
+                <article role="dialog" aria-labelledby="dialog-preview-title">
+                  <h4 id="dialog-preview-title">Dialog Preview</h4>
+                  <p>This non-modal preview uses dialog semantics without opening a native modal.</p>
+                  <form method="dialog">
+                    <button type="button">Close</button>
+                  </form>
+                </article>
+              </section>
+
+              <section role="tabpanel">
+                <h4>HTML</h4>
+                <pre><code>&lt;dialog&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Confirm action&lt;/h2&gt;
+    &lt;button&gt;Close&lt;/button&gt;
+  &lt;/article&gt;
+&lt;/dialog&gt;</code></pre>
+              </section>
+            </div>
+          </section>
+
+          <section id="semantic-components">
+            <h3>Semantic Components</h3>
+            <p>
+              Before reaching for a directive, use real HTML structure. Sections become readable
+              panels, articles become self-contained cards, and asides become callouts &mdash; with
+              no attributes at all.
+            </p>
+
+            <div data-kind="tabs">
+              <div role="tablist" aria-label="Semantic components">
+                <button role="tab">Demo</button>
+                <button role="tab">HTML</button>
+              </div>
+
+              <section role="tabpanel">
+                <h4>Demo</h4>
+                <article>
+                  <header>
+                    <h4>Release Notes</h4>
+                    <p>A self-contained semantic card.</p>
+                  </header>
+                  <aside>Nested asides become callouts inside larger content.</aside>
+                  <footer>
+                    <small>Version 1.6.0</small>
+                  </footer>
+                </article>
+              </section>
+
+              <section role="tabpanel">
+                <h4>HTML</h4>
+                <pre><code>&lt;article&gt;
+  &lt;header&gt;
+    &lt;h3&gt;Release Notes&lt;/h3&gt;
+    &lt;p&gt;A self-contained semantic card.&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;aside&gt;Nested asides become callouts.&lt;/aside&gt;
+  &lt;footer&gt;&lt;small&gt;Version 1.6.0&lt;/small&gt;&lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+              </section>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer data-width="wide">
+      <p>
+        <small>
+          Vitre UI &mdash; <a href="index.html">Documentation</a> &middot;
+          <a href="examples.html">Examples</a> &middot;
+          <a href="https://github.com/vitre-ui/vitre-css">GitHub</a>
+        </small>
+      </p>
+    </footer>
+
+    <script type="module">
+      import "https://unpkg.com/vitre-css/vitre.js";
+    </script>
+  </body>
+</html>
