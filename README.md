@@ -2,11 +2,21 @@
 
 ![Vitre UI](https://vitre-ui.com/images/vitre-ui-dark.webp)
 
-Documentation for Vitre UI, covering `vitre-css` and `vitre-js`.
+Documentation for Vitre UI, the `vitre-css` package.
 
-This site is plain static HTML/CSS/JS. It loads the latest published Vitre
-packages from unpkg so it showcases current `vitre-css` and `vitre-js`
-behavior without a local package install or build step.
+This site is plain static HTML/CSS/JS. It loads the latest published
+`vitre-css` from unpkg &mdash; both `vitre.css` and the optional `vitre.js`
+&mdash; so it showcases current behavior without a local package install or
+build step.
+
+Pages:
+
+- `index.html` &mdash; overview, installation, directives, and the token reference.
+- `components.html` &mdash; per-component markup, demos, and behavior.
+- `examples.html` &mdash; a dense element gallery for spot-checking raw semantic HTML.
+
+> `vitre-js` merged into `vitre-css` in 1.6.0. All pages load
+> `unpkg.com/vitre-css/vitre.js`.
 
 ## Development
 

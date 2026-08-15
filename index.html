@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Documentation for Vitre UI, including Vitre CSS and Vitre JS."
+      content="Documentation for Vitre UI: class-free CSS and optional behavior helpers for semantic HTML."
     >
     <title>Vitre UI Documentation</title>
     <link rel="stylesheet" href="/vitre-base.css">
@@ -272,7 +272,7 @@
                     <td><code>data-kind</code></td>
                     <td><code>alert</code>, <code>tabs</code>, <code>splitter</code>, <code>nav</code>, <code>theme-toggle</code></td>
                     <td><code>div</code>, <code>p</code>, <code>span</code>, or another semantic container</td>
-                    <td>Marks a semantic component for Vitre styling or optional Vitre JS behavior.</td>
+                    <td>Marks a semantic component for Vitre styling or optional <code>vitre.js</code> behavior.</td>
                   </tr>
                   <tr>
                     <td><code>data-color</code></td>
@@ -308,19 +308,19 @@
                     <td><code>dismiss</code></td>
                     <td>Boolean attribute</td>
                     <td><code>[data-kind="alert"]</code></td>
-                    <td>Lets Vitre JS inject a dismiss button.</td>
+                    <td>Lets <code>vitre.js</code> inject a dismiss button.</td>
                   </tr>
                   <tr>
                     <td><code>timeout</code></td>
                     <td>Seconds, such as <code>6</code> or <code>12</code></td>
                     <td><code>[data-kind="alert"]</code></td>
-                    <td>Lets Vitre JS dismiss the alert automatically after the given delay.</td>
+                    <td>Lets <code>vitre.js</code> dismiss the alert automatically after the given delay.</td>
                   </tr>
                   <tr>
                     <td><code>data-v-content</code></td>
                     <td>Boolean attribute</td>
                     <td>Child element inside <code>[data-kind="alert"]</code></td>
-                    <td>Required wrapper for alert text content when <code>dismiss</code> is present. Reserves the layout slot so the dismiss button aligns correctly before Vitre JS loads.</td>
+                    <td>Required wrapper for alert text content when <code>dismiss</code> is present. Reserves the layout slot so the dismiss button aligns correctly before <code>vitre.js</code> loads.</td>
                   </tr>
                 </tbody>
               </table>

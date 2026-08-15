@@ -27,8 +27,9 @@
     <header data-width="wide">
       <h1>Vitre UI Components</h1>
       <p>
-        Components are ordinary semantic HTML marked with a <code>data-kind</code> directive. Vitre
-        CSS styles them, and Vitre JS adds behavior to the ones that need it.
+        Components are ordinary semantic HTML marked with a <code>data-kind</code> directive.
+        <code>vitre.css</code> styles them, and <code>vitre.js</code> adds behavior to the ones
+        that need it.
       </p>
       <p data-kind="alert" data-color="info">
         <span data-v-content>
@@ -167,7 +168,7 @@
                 <p>
                   When using <code>dismiss</code>, wrap the text in a child carrying
                   <code>data-v-content</code>. That reserves the layout slot for the close button so
-                  the alert does not reflow when Vitre JS injects it.
+                  the alert does not reflow when <code>vitre.js</code> injects it.
                 </p>
               </section>
 
@@ -195,7 +196,7 @@
                 <pre><code>document.addEventListener("vitre:dismiss", (event) =&gt; {
   console.log("dismissed", event.detail.source);
 });</code></pre>
-                <p>Without Vitre JS the alert renders as a styled, permanent block.</p>
+                <p>Without <code>vitre.js</code> the alert renders as a styled, permanent block.</p>
               </section>
             </div>
           </section>
@@ -205,7 +206,7 @@
             <p>
               Wrap a <code>role="tablist"</code> and its <code>role="tabpanel"</code> sections in
               <code>data-kind="tabs"</code>. You write the roles the pattern already requires;
-              Vitre JS generates the rest of the ARIA wiring. Every tabbed panel on this page is
+              <code>vitre.js</code> generates the rest of the ARIA wiring. Every tabbed panel on this page is
               this component.
             </p>
 
@@ -251,7 +252,7 @@
 
               <section role="tabpanel">
                 <h4>Behavior</h4>
-                <p>Vitre JS generates every attribute you did not write:</p>
+                <p><code>vitre.js</code> generates every attribute you did not write:</p>
                 <ul>
                   <li>Missing <code>id</code> values on tabs and panels</li>
                   <li><code>aria-controls</code> and <code>aria-labelledby</code> pairing</li>
@@ -281,7 +282,7 @@
 });</code></pre>
 
                 <p>
-                  Without Vitre JS the tab strip is hidden and every panel renders stacked, so give
+                  Without <code>vitre.js</code> the tab strip is hidden and every panel renders stacked, so give
                   each panel a heading. Content stays reachable instead of leaving dead buttons
                   behind.
                 </p>
@@ -344,7 +345,7 @@
               <section role="tabpanel">
                 <h4>Behavior</h4>
                 <p>
-                  Vitre JS makes the handle focusable and gives it a default
+                  <code>vitre.js</code> makes the handle focusable and gives it a default
                   <code>aria-orientation</code> when one is not supplied. Pane sizing stays your
                   application's responsibility &mdash; Vitre does not own your layout model.
                 </p>
@@ -375,7 +376,7 @@
 
               <section role="tabpanel">
                 <h4>Behavior</h4>
-                <p>Vitre JS intercepts same-origin primary clicks and:</p>
+                <p><code>vitre.js</code> intercepts same-origin primary clicks and:</p>
                 <ul>
                   <li>Pushes the new URL with <code>history.pushState</code></li>
                   <li>Dispatches <code>popstate</code> so history-based routers react</li>
@@ -399,7 +400,7 @@
             <h3>Theme Toggle</h3>
             <p>
               An empty element with <code>data-kind="theme-toggle"</code> becomes a light/dark
-              switch. Vitre JS renders the button, so nothing appears without it.
+              switch. <code>vitre.js</code> renders the button, so nothing appears without it.
             </p>
 
             <div data-kind="tabs">
